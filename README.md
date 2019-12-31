@@ -6,12 +6,12 @@ Make SRT Caption Fast!!!! This is a fast and dirty javascript SRT caption tool.
 * Open a web server
 * Run index.html in Firefox (not Chrome)
 * Controls:
-** K: Timestamp this line's end time & next line's start time 
-** L: Timestamp this line's end time
-** I: Scroll back one line 
-** O: Scroll forward one line
-** U: Rewind 5 seconds
-** P: Forward 5 seconds
-** Q: Make SRT File
+  * K: Timestamp this line's end time & next line's start time 
+  * L: Timestamp this line's end time
+  * I: Scroll back one line 
+  * O: Scroll forward one line
+  * U: Rewind 5 seconds
+  * P: Forward 5 seconds
+  * Q: Make SRT File
 
 Enjoy.
