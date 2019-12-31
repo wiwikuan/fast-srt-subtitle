@@ -38,7 +38,7 @@ function draw() {
   curr = vid.elt.currentTime;
   sta = `Stamping Line ${currentStamping} | Playhead: ${curr}`;
   tAreaText = "";
-  for (let i = -2; i < 5; i++) {
+  for (let i = 0; i < 5; i++) {
     if (i == 0) {
       tAreaText += "** 目前 ---> "
     }
@@ -73,6 +73,12 @@ function keyPressed() {
   } else if (keyCode === 81) {
     // Q : Make SRT
     makeSRT();
+  } else if (keyCode === 85) { // U
+    vid.elt.currentTime -= 5;
+      
+  } else if (keyCode === 80) { // P
+    vid.elt.currentTime += 5
+        
   }
 }
 
