@@ -74,11 +74,11 @@ function keyPressed() {
     // Q : Make SRT
     makeSRT();
   } else if (keyCode === 85) { // U
-    vid.elt.currentTime -= 5;
-      
+    vid.elt.currentTime -= 3;
+
   } else if (keyCode === 80) { // P
-    vid.elt.currentTime += 5
-        
+    vid.elt.currentTime += 3;
+
   }
 }
 
