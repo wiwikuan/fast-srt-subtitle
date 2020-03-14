@@ -1,10 +1,21 @@
-// main.js
-// This file checks cli argumen to see which mode to run.
+// Library
+const electron = require('electron')
 
-const guiMain = require("./main_gui.js");
-const browserMain = require("./main_browser.js");
+const {
+	app,
+	BrowserWindow
+} = require('electron')
 
-process.argv.forEach( function (val, index, array) {
-	if (val == "gui") guiMain.start();
-	else if (val == "browser") browserMain.start();
-});
+function createWindow () {
+	let win = new BrowserWindow({
+		width: 800,
+		height: 600,
+		webPreferences: {
+			nodeIntergration: true
+		}
+	})
+	win.loadFile('index.html')
+}
+
+console.log("[main_gui.js] Gui mode start");
+app.whenReady().then(createWindow);
