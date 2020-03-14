@@ -1,6 +1,5 @@
 <template lang="pug">
-#app
- vk-navbar
+vk-navbar
   vk-navbar-nav
     vk-navbar-nav-item(title="Fast SRT Subtitle Toolkit", active)
   vk-navbar-nav(slot="right")
