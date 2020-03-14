@@ -15,4 +15,11 @@ Make SRT Caption Fast!!!! This is a fast and dirty javascript SRT caption tool.
   * P: Forward 5 seconds
   * Q: Make SRT File
 
+## Usage
+With npm, excute these command
+``` bash
+npm i
+npm start
+```
+
 Enjoy.
