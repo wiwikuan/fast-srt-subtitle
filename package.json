@@ -1,0 +1,20 @@
+{
+  "name": "fast-srt-subtitle",
+  "version": "1.0.0",
+  "description": "This is a fast and dirty javascript SRT caption tool.",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "test": "electron . test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wiwikuan/fast-srt-subtitle.git"
+  },
+  "author": "wiwikuan",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/wiwikuan/fast-srt-subtitle/issues"
+  },
+  "homepage": "https://github.com/wiwikuan/fast-srt-subtitle"
+}
