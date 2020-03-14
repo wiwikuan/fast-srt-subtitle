@@ -1,3 +1,25 @@
 export default {
+  error: '錯誤',
+  close: '關閉',
 
+  loadTextFile: '加載文字字幕',
+  linesOfSubtitle: '字幕行數：',
+  lines: ' 行',
+  startEditing: '開始編輯',
+  reactTime: '反應時間：',
+  currentLine: '當前字幕',
+  emptyHint: '[空]',
+  comingLines: '字幕預覽',
+  eofHint: '[檔案結束]',
+  startReviewing: '開始審查',
+  saveFile: '儲藏檔案',
+  loadVideo: '加載影片',
+
+  shortcuts: '快捷鍵',
+  shortcutK: '切換到下一行',
+  shortcutL: '停止當前行',
+  shortcutU: '倒帶 3 秒',
+  shortcutP: '快轉 3 秒',
+  shortcutI: '返回上一行',
+  shortcutO: '跳過當前行',
 };

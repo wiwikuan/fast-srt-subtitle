@@ -3,10 +3,10 @@ export default {
   close: 'Close',
 
   loadTextFile: 'Load Text File',
-  linesOfSubtitle: 'Lines of Subtitle:',
+  linesOfSubtitle: 'Lines of Subtitle: ',
   lines: 'line(s)',
   startEditing: 'Start Editing',
-  reactTime: 'React Time:',
+  reactTime: 'React Time: ',
   currentLine: 'Current Line',
   emptyHint: '[Empty]',
   comingLines: 'Coming Lines',

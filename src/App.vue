@@ -16,14 +16,14 @@
         vk-button(@click="loadText")
           | {{ $t("loadTextFile") }}
         .uk-margin
-          textarea.uk-textarea(rows="20", placeholder="Subtitle Preview", v-model="subtitleText")
+          textarea.uk-textarea(rows="20", v-model="subtitleText")
         p.uk-margin
-          | {{ $t("linesOfSubtitle") }} {{ subtitleText.split('\n').length }} {{ $t("lines") }}
+          | {{ $t("linesOfSubtitle") }}{{ subtitleText.split('\n').length }} {{ $t("lines") }}
         vk-button.uk-margin(type="primary", @click="startEdit")
           | {{ $t("startEditing") }}
       div(v-if="stage === 'edit'")
         h4
-          | {{ $t("reactTime") }} {{ reactTime }}s
+          | {{ $t("reactTime") }}{{ reactTime }}s
         input.uk-range(type="range", min="0.0" max="1.0", step="0.01", v-model="reactTime")
         h2
           | {{ $t("currentLine") }}
@@ -40,7 +40,7 @@
         vk-button.uk-margin(type="primary", @click="startReview")
           | {{ $t("startReviewing") }}
       div(v-if="stage === 'review'")
-        textarea.uk-textarea(rows="20", placeholder="Subtitle Preview", v-model="subtitleReview")
+        textarea.uk-textarea(rows="20", v-model="subtitleReview")
         vk-button.uk-margin(type="primary", @click="saveFile")
           | {{ $t("saveFile") }}
         a.hidden(ref="download", href="")
