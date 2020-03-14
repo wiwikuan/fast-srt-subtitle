@@ -4,6 +4,8 @@ This project is inspired by [wiwikuan/fast-srt-subtitle](https://github.com/wiwi
 
 ## Online Demo
 
+[Live Demo](https://srt.coderemixer.com)
+
 ## Build Setup
 
 ``` bash
