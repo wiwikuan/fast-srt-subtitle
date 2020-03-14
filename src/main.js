@@ -6,6 +6,8 @@ import VuikitIcons from '@vuikit/icons';
 import VueI18n from 'vue-i18n';
 
 import '@vuikit/theme';
+import 'plyr/dist/plyr.css';
+
 import App from './App';
 import messages from './i18n';
 

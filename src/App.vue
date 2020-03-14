@@ -41,8 +41,12 @@
           | {{ $t("startReviewing") }}
       div(v-if="stage === 'review'")
         textarea.uk-textarea(rows="20", v-model="subtitleReview")
-        vk-button.uk-margin(type="primary", @click="saveFile")
-          | {{ $t("saveFile") }}
+        .uk-margin
+          vk-button(@click="updatePreview")
+            | Update Preview
+        .uk-margin
+          vk-button(type="primary", @click="saveFile")
+            | {{ $t("saveFile") }}
         a.hidden(ref="download", href="")
     .panel
       input.hidden(
@@ -52,14 +56,16 @@
         @change="readVideo")
       vk-button(@click="loadVideo", v-if="stage === 'prepare'")
         | {{ $t("loadVideo") }}
-      video.video.uk-margin(
-        ref="video",
-        src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
-        controls)
+      video.video#player.uk-margin(ref="video", controls)
+        source(type="video/mp4", ref="source", src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4")
+        track(default, kind="subtitles", label="Default", ref="caption", src="/static/empty.vtt")
       shortcut(v-show="stage === 'edit'")
 </template>
 
 <script>
+import VTTConverter from 'srt-webvtt';
+import Plyr from 'plyr'; // Firefox CC is buggy.
+
 import Navbar from './components/Navbar';
 import Shortcut from './components/Shortcut';
 
@@ -73,6 +79,7 @@ export default {
     return {
       modalShow: false,
       modalText: '',
+      player: new Plyr('#player'),
       stage: 'prepare',
       subtitleText: '',
       subtitles: [],
@@ -115,7 +122,7 @@ export default {
     readVideo(evt) {
       const filename = evt.target.files[0];
       const url = URL.createObjectURL(filename);
-      this.$refs.video.src = url;
+      this.$refs.source.src = url;
       this.$refs.video.load();
     },
     startEdit() {
@@ -133,7 +140,9 @@ export default {
     startReview() {
       window.removeEventListener('keypress', this.keyHandler);
       this.stage = 'review';
+      this.$refs.video.currentTime = 0;
       this.generateSubtitle();
+      this.updatePreview();
     },
     keyHandler(e) {
       const pressed = String.fromCharCode(e.keyCode).toLowerCase();
@@ -192,12 +201,12 @@ export default {
     },
     timeFormat(secs) {
       if (secs === null) {
-        return '0:0:0,0';
+        return '00:00:00,000';
       }
-      const hour = Math.floor(secs / 60 / 60);
-      const min = Math.floor((secs / 60) % 60);
-      const sec = Math.floor(secs % 60);
-      const mil = Math.floor((secs * 1000) % 1000);
+      const hour = `${Math.floor(secs / 60 / 60)}`.padStart(2, '0');
+      const min = `${Math.floor((secs / 60) % 60)}`.padStart(2, '0');
+      const sec = `${Math.floor(secs % 60)}`.padStart(2, '0');
+      const mil = `${Math.floor((secs * 1000) % 1000)}`.padStart(3, '0');
       return `${hour}:${min}:${sec},${mil}`;
     },
     generateSubtitle() {
@@ -206,6 +215,23 @@ export default {
         this.subtitleReview += `${i + 1}\n`;
         this.subtitleReview += `${this.timeFormat(this.subtitleStarts[i])} --> ${this.timeFormat(this.subtitleEnds[i])}\n`;
         this.subtitleReview += `${this.subtitles[i]}\n\n`;
+      }
+    },
+    async updatePreview() {
+      const blob = new Blob(
+        [this.subtitleReview],
+        {
+          type: 'text/plain;charset=utf-8',
+        },
+      );
+      try {
+        const converter = new VTTConverter(blob);
+        const url = await converter.getURL();
+        this.$refs.caption.setAttribute('src', url);
+        this.$refs.video.load();
+      } catch (_e) {
+        this.modalShow = true;
+        this.modalText = 'SRT file is invalid.';
       }
     },
     saveFile() {
