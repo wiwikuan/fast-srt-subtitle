@@ -45,8 +45,11 @@
           vk-button(@click="updatePreview")
             | {{ $t("updatePreview") }}
         .uk-margin
-          vk-button(type="primary", @click="saveFile")
-            | {{ $t("saveFile") }}
+          vk-button(type="primary", @click="saveSrt")
+            | {{ $t("saveSrt") }}
+        .uk-margin
+          vk-button(type="primary", @click="saveVtt")
+            | {{ $t("saveVtt") }}
         a.hidden(ref="download", href="")
     .panel
       input.hidden(
@@ -239,12 +242,31 @@ export default {
         this.modalText = 'SRT file is invalid.';
       }
     },
-    saveFile() {
+    saveSrt() {
       const a = this.$refs.download;
       const file = new Blob([this.subtitleReview], { type: 'text/plain' });
       a.href = URL.createObjectURL(file);
       a.download = 'result.srt';
       a.click();
+    },
+    async saveVtt() {
+      const a = this.$refs.download;
+      const blob = new Blob(
+        [this.subtitleReview],
+        {
+          type: 'text/plain;charset=utf-8',
+        },
+      );
+      try {
+        const converter = new VTTConverter(blob);
+        const url = await converter.getURL();
+        a.href = url;
+        a.download = 'result.vtt';
+        a.click();
+      } catch (_e) {
+        this.modalShow = true;
+        this.modalText = 'SRT file is invalid.';
+      }
     },
   },
 };

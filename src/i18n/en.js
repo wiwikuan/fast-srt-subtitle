@@ -13,7 +13,8 @@ export default {
   eofHint: '[End of File]',
   startReviewing: 'Start Reviewing',
   updatePreview: 'Update Preview',
-  saveFile: 'Save File',
+  saveSrt: 'Save in SRT Format',
+  saveVtt: 'Save in WebVTT Format',
   loadVideo: 'Load Video',
 
   shortcuts: 'Shotcuts',

@@ -13,7 +13,8 @@ export default {
   eofHint: '[文件结束]',
   startReviewing: '开始审阅',
   updatePreview: '更新预览',
-  saveFile: '保存文件',
+  saveSrt: '保存为 SRT 文件',
+  saveVtt: '保存为 WebVTT 文件',
   loadVideo: '载入视频',
 
   shortcuts: '快捷键',

@@ -13,6 +13,8 @@ export default {
   eofHint: '[檔案結束]',
   startReviewing: '開始審查',
   updatePreview: '更新預覽',
+  saveSrt: '以 SRT 檔案存儲',
+  saveVtt: '以 WebVTT 檔案存儲',
   saveFile: '儲藏檔案',
   loadVideo: '加載影片',
 
