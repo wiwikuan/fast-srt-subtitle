@@ -4,8 +4,7 @@
   "description": "This is a fast and dirty javascript SRT caption tool.",
   "main": "main.js",
   "scripts": {
-    "start": "electron .",
-    "test": "electron . test"
+    "start": "electron ."
   },
   "repository": {
     "type": "git",
