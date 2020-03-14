@@ -12,6 +12,7 @@ export default {
   comingLines: '字幕預覽',
   eofHint: '[檔案結束]',
   startReviewing: '開始審查',
+  updatePreview: '更新預覽',
   saveFile: '儲藏檔案',
   loadVideo: '加載影片',
 

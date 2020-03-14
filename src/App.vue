@@ -43,7 +43,7 @@
         textarea.uk-textarea(rows="20", v-model="subtitleReview")
         .uk-margin
           vk-button(@click="updatePreview")
-            | Update Preview
+            | {{ $t("updatePreview") }}
         .uk-margin
           vk-button(type="primary", @click="saveFile")
             | {{ $t("saveFile") }}

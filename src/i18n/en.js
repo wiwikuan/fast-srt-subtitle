@@ -12,6 +12,7 @@ export default {
   comingLines: 'Coming Lines',
   eofHint: '[End of File]',
   startReviewing: 'Start Reviewing',
+  updatePreview: 'Update Preview',
   saveFile: 'Save File',
   loadVideo: 'Load Video',
 
