@@ -16,6 +16,7 @@ let srt = "";
 function preload() {
   vid = createVideo(vidFile);
   vid.size(640, 320);
+  vid.showControls();
   subText = loadStrings(subFile);
 }
 
