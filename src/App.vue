@@ -60,11 +60,18 @@
         source(type="video/mp4", ref="source", src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4")
         track(default, kind="subtitles", label="Default", ref="caption", src="/static/empty.vtt")
       shortcut(v-show="stage === 'edit'")
+  footer.footer
+    | Originially implemented by&nbsp;
+    a(href="https://github.com/wiwikuan/")
+      | @wiwikuan
+    | , and refactored by&nbsp;
+    a(href="https://github.com/dsh0416/")
+      | @dsh0416
+    | &nbsp;with ❤️️.
 </template>
 
 <script>
 import VTTConverter from 'srt-webvtt';
-import Plyr from 'plyr'; // Firefox CC is buggy.
 
 import Navbar from './components/Navbar';
 import Shortcut from './components/Shortcut';
@@ -78,8 +85,6 @@ export default {
   data() {
     return {
       modalShow: false,
-      modalText: '',
-      player: new Plyr('#player'),
       stage: 'prepare',
       subtitleText: '',
       subtitles: [],
@@ -260,4 +265,13 @@ export default {
   width 100%
 .alt-text
   color #aaa
+.footer
+  position fixed
+  left 0
+  bottom 0
+  width 100%
+  padding 20px
+  background-color #eee
+  color #000
+  text-align center
 </style>
