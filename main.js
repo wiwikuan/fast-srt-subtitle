@@ -1,21 +1,25 @@
-// Library
-const electron = require('electron')
+const http = require('http');
+const fs = require("fs");
+const express = require('express')
+const app = express();
+const router = express.Router();
 
-const {
-	app,
-	BrowserWindow
-} = require('electron')
+const hostname = '127.0.0.1';
+const port = 3000;
+var html;
 
-function createWindow () {
-	let win = new BrowserWindow({
-		width: 800,
-		height: 600,
-		webPreferences: {
-			nodeIntergration: true
-		}
-	})
-	win.loadFile('index.html')
-}
+fs.readFile('./index.html', function (err, data) {
+	if (err) throw err;
+	html = data.toString();
+})
 
-console.log("[main_gui.js] Gui mode start");
-app.whenReady().then(createWindow);
+router.get('/', function (req, res) {
+	res.write(html);
+	res.end();
+})
+
+app.use(express.static('public'));
+
+app.use('/', router)
+
+app.listen(port)

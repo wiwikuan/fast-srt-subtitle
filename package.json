@@ -4,8 +4,7 @@
   "description": "This is a fast and dirty javascript SRT caption tool.",
   "main": "main.js",
   "scripts": {
-    "start": "electron .",
-    "browser": "node main_browser.js"
+    "start": "node main.js"
   },
   "repository": {
     "type": "git",
@@ -18,6 +17,6 @@
   },
   "homepage": "https://github.com/wiwikuan/fast-srt-subtitle",
   "devDependencies": {
-    "electron": "^8.1.1"
+    "express": "^4.17.1"
   }
 }
