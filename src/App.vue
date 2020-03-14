@@ -142,12 +142,14 @@ export default {
         case 'k':
           // Switch to Next Line
           if (this.currentLine !== null) {
-            this.subtitleEnds[this.currentLine] = this.$refs.video.currentTime - 0.01;
+            this.subtitleEnds[this.currentLine] =
+              this.$refs.video.currentTime - 0.01 - this.reactTime;
           }
           this.currentLine = this.nextLine;
           this.nextLine += 1;
           if (this.currentLine < this.subtitles.length) {
-            this.subtitleStarts[this.currentLine] = this.$refs.video.currentTime;
+            this.subtitleStarts[this.currentLine] =
+              this.$refs.video.currentTime - this.reactTime;
           } else {
             this.currentLine = null;
           }
@@ -155,7 +157,8 @@ export default {
         case 'l':
           // Stop Current Line
           if (this.currentLine !== null) {
-            this.subtitleEnds[this.currentLine] = this.$refs.video.currentTime - 0.01;
+            this.subtitleEnds[this.currentLine] =
+              this.$refs.video.currentTime - 0.01 - this.reactTime;
           }
           this.currentLine = null;
           break;
