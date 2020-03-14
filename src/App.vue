@@ -3,46 +3,46 @@
   navbar
   vk-modal(:show.sync="modalShow")
     vk-modal-title
-      | Error
+      | {{ $t("error") }}
     p
       | {{modalText}}
     p.uk-text-right
       vk-button.uk-margin-small-right(@click="modalShow = false")
-        | Close
+        | {{ $t("close") }}
   .container
     .panel
       div(v-if="stage === 'prepare'")
         input.hidden(type="file", ref="textLoader", accept="text/plain", @change="readText")
         vk-button(@click="loadText")
-          | Load Text File
+          | {{ $t("loadTextFile") }}
         .uk-margin
           textarea.uk-textarea(rows="20", placeholder="Subtitle Preview", v-model="subtitleText")
         p.uk-margin
-          | Lines of Subtitle: {{ subtitleText.split('\n').length }} line(s)
+          | {{ $t("linesOfSubtitle") }} {{ subtitleText.split('\n').length }} {{ $t("lines") }}
         vk-button.uk-margin(type="primary", @click="startEdit")
-          | Start Editing
+          | {{ $t("startEditing") }}
       div(v-if="stage === 'edit'")
         h4
-          | React Time: {{ reactTime }}
+          | {{ $t("reactTime") }} {{ reactTime }}s
         input.uk-range(type="range", min="0.0" max="1.0", step="0.01", v-model="reactTime")
         h2
-          | Current Line
+          | {{ $t("currentLine") }}
         h4.alt-text(v-if="currentLine === null")
-          | [Empty]
+          | {{ $t("emptyHint") }}
         h4(v-else)
           | {{ subtitles[currentLine] }}
         h2
-          | Coming Lines
+          | {{ $t("comingLines") }}
         h4.alt-text(v-for="subtitle in nextLines")
           | {{ subtitle }}
         h4.alt-text(v-if="nextLines.length < 4")
-          | [End of File]
+          | {{ $t("eofHint") }}
         vk-button.uk-margin(type="primary", @click="startReview")
-          | Start Reviewing
+          | {{ $t("startReviewing") }}
       div(v-if="stage === 'review'")
         textarea.uk-textarea(rows="20", placeholder="Subtitle Preview", v-model="subtitleReview")
         vk-button.uk-margin(type="primary", @click="saveFile")
-          | Save File
+          | {{ $t("saveFile") }}
         a.hidden(ref="download", href="")
     .panel
       input.hidden(
@@ -51,7 +51,7 @@
         accept="audio/mp4, video/mp4",
         @change="readVideo")
       vk-button(@click="loadVideo", v-if="stage === 'prepare'")
-        | Load Video
+        | {{ $t("loadVideo") }}
       video.video.uk-margin(
         ref="video",
         src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",

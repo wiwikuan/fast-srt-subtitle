@@ -17,6 +17,7 @@
     "stylus": "^0.54.7",
     "stylus-loader": "^3.0.2",
     "vue": "^2.5.2",
+    "vue-i18n": "^8.15.5",
     "vuikit": "^0.8.10"
   },
   "devDependencies": {

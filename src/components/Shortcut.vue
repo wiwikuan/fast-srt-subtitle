@@ -1,37 +1,37 @@
 <template lang="pug">
 vk-card.shortcuts
   vk-card-title
-    | Shortcuts
+    | {{ $t("shortcuts") }}
   p
     vk-label.shortcut-label
       | K
     span.shortcut-text
-      | Switch to Next Line
+      | {{ $t("shortcutK") }}
   p
     vk-label.shortcut-label
       | L
     span.shortcut-text
-      | Stop Current Line
+      | {{ $t("shortcutL") }}
   p
     vk-label.shortcut-label
       | U
     span.shortcut-text
-      | Prev 3 Secs
+      | {{ $t("shortcutU") }}
   p
     vk-label.shortcut-label
       | P
     span.shortcut-text
-      | Skip 3 Secs
+      | {{ $t("shortcutP") }}
   p
     vk-label.shortcut-label
       | I
     span.shortcut-text
-      | Prev Line
+      | {{ $t("shortcutI") }}
   p
     vk-label.shortcut-label
       | O
     span.shortcut-text
-      | Skip Line
+      | {{ $t("shortcutO") }}
 </template>
 
 <script>
