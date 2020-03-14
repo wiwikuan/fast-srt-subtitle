@@ -54,7 +54,7 @@
         | Load Video
       video.video.uk-margin(
         ref="video",
-        src="http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
+        src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
         controls)
       shortcut(v-show="stage === 'edit'")
 </template>
