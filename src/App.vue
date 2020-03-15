@@ -137,7 +137,7 @@ export default {
     startEdit() {
       if (this.subtitleText.length === 0) {
         this.modalShow = true;
-        this.modalText = 'Please import the subtitle text first.';
+        this.modalText = this.$t('emptySubtitle');
       } else {
         this.subtitles = this.subtitleText.split('\n');
         this.subtitleStarts = new Array(this.subtitles.length).fill(null);
@@ -189,6 +189,7 @@ export default {
           this.$refs.video.currentTime += 3;
           break;
         case 'i':
+          // Prev Line
           if (this.nextLine > 0) {
             this.currentLine = this.nextLine - 2;
             this.nextLine = this.nextLine - 1;
@@ -199,6 +200,7 @@ export default {
           }
           break;
         case 'o':
+          // Next Line
           if (this.nextLine < this.subtitles.length) {
             this.currentLine = this.nextLine;
             this.nextLine = this.nextLine + 1;
@@ -228,10 +230,7 @@ export default {
     },
     async updatePreview() {
       const blob = new Blob(
-        [this.subtitleReview],
-        {
-          type: 'text/plain;charset=utf-8',
-        },
+        [this.subtitleReview], { type: 'text/plain' },
       );
       try {
         const converter = new VTTConverter(blob);
@@ -241,7 +240,7 @@ export default {
         this.$refs.video.load();
       } catch (_e) {
         this.modalShow = true;
-        this.modalText = 'SRT file is invalid.';
+        this.modalText = this.$t('invalidSrt');
       }
     },
     saveSrt() {
@@ -254,10 +253,7 @@ export default {
     async saveVtt() {
       const a = this.$refs.download;
       const blob = new Blob(
-        [this.subtitleReview],
-        {
-          type: 'text/plain;charset=utf-8',
-        },
+        [this.subtitleReview], { type: 'text/plain' },
       );
       try {
         const converter = new VTTConverter(blob);
@@ -267,7 +263,7 @@ export default {
         a.click();
       } catch (_e) {
         this.modalShow = true;
-        this.modalText = 'SRT file is invalid.';
+        this.modalText = this.$t('invalidSrt');
       }
     },
   },

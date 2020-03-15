@@ -18,6 +18,9 @@ export default {
   saveFile: '儲藏檔案',
   loadVideo: '加載影片',
 
+  emptySubtitle: '字幕不能爲空',
+  invalidSrt: 'SRT 檔案不合法',
+
   shortcuts: '快捷鍵',
   shortcutK: '切換到下一行',
   shortcutL: '停止當前行',

@@ -17,6 +17,9 @@ export default {
   saveVtt: '保存为 WebVTT 文件',
   loadVideo: '载入视频',
 
+  emptySubtitle: '字幕不能为空',
+  invalidSrt: 'SRT 文件不合法',
+
   shortcuts: '快捷键',
   shortcutK: '切换至下一行',
   shortcutL: '停止当前行',

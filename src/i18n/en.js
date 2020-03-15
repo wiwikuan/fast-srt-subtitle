@@ -17,6 +17,9 @@ export default {
   saveVtt: 'Save in WebVTT Format',
   loadVideo: 'Load Video',
 
+  emptySubtitle: 'Subtitle cannot be empty',
+  invalidSrt: 'SRT file is invalid',
+
   shortcuts: 'Shotcuts',
   shortcutK: 'Switch to Next Line',
   shortcutL: 'Stop Current Line',
