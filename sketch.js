@@ -59,7 +59,7 @@ function keyPressed() {
     }
     // set prev line's end time, if prev end time > currentTime;
     if (lineEndTime[currentStamping] > vid.elt.currentTime - reactTime || lineEndTime[currentStamping] == null) {
-      lineEndTime[currentStamping] = vid.elt.currentTime - 0.03 - reactTime;
+      lineEndTime[currentStamping] = vid.elt.currentTime - 0.05 - reactTime;
       if (lineEndTime[currentStamping] < 0){
         lineEndTime[currentStamping] = 0;
       }
