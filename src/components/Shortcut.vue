@@ -2,32 +2,32 @@
 vk-card.shortcuts
   vk-card-title
     | {{ $t("shortcuts") }}
-  p
+  p.operation(@click="$emit('operate', { key: 'k' })")
     vk-label.shortcut-label
       | K
     span.shortcut-text
       | {{ $t("shortcutK") }}
-  p
+  p.operation(@click="$emit('operate', { key: 'l' })")
     vk-label.shortcut-label
       | L
     span.shortcut-text
       | {{ $t("shortcutL") }}
-  p
+  p.operation(@click="$emit('operate', { key: 'u' })")
     vk-label.shortcut-label
       | U
     span.shortcut-text
       | {{ $t("shortcutU") }}
-  p
+  p.operation(@click="$emit('operate', { key: 'p' })")
     vk-label.shortcut-label
       | P
     span.shortcut-text
       | {{ $t("shortcutP") }}
-  p
+  p.operation(@click="$emit('operate', { key: 'i' })")
     vk-label.shortcut-label
       | I
     span.shortcut-text
       | {{ $t("shortcutI") }}
-  p
+  p.operation(@click="$emit('operate', { key: 'o' })")
     vk-label.shortcut-label
       | O
     span.shortcut-text
@@ -47,4 +47,6 @@ export default {
   text-align center
 .shortcut-text
   margin-left 10px
+.operation
+  cursor pointer
 </style>

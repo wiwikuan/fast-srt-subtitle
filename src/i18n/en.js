@@ -20,7 +20,7 @@ export default {
   emptySubtitle: 'Subtitle cannot be empty',
   invalidSrt: 'SRT file is invalid',
 
-  shortcuts: 'Shotcuts',
+  shortcuts: 'Operations',
   shortcutK: 'Switch to Next Line',
   shortcutL: 'Stop Current Line',
   shortcutU: 'Prev 3 Secs',

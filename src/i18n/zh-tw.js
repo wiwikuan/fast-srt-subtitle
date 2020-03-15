@@ -21,7 +21,7 @@ export default {
   emptySubtitle: '字幕不能爲空',
   invalidSrt: 'SRT 檔案不合法',
 
-  shortcuts: '快捷鍵',
+  shortcuts: '操作',
   shortcutK: '切換到下一行',
   shortcutL: '停止當前行',
   shortcutU: '倒帶 3 秒',

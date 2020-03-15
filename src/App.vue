@@ -62,7 +62,7 @@
       video.video#player.uk-margin(ref="video", controls)
         source(type="video/mp4", ref="source", src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4")
         track(default, label="Default", ref="caption", src="/static/empty.vtt")
-      shortcut(v-show="stage === 'edit'")
+      shortcut(v-show="stage === 'edit'", @operate="keyHandler")
   footer.footer
     p.footer-p
       | Originially implemented by&nbsp;
@@ -155,9 +155,7 @@ export default {
       this.updatePreview();
     },
     keyHandler(e) {
-      const pressed = String.fromCharCode(e.keyCode).toLowerCase();
-
-      switch (pressed) {
+      switch (e.key) {
         case 'k':
           // Switch to Next Line
           if (this.currentLine !== null) {
