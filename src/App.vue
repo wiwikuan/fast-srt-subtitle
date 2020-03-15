@@ -61,7 +61,7 @@
         | {{ $t("loadVideo") }}
       video.video#player.uk-margin(ref="video", controls)
         source(type="video/mp4", ref="source", src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4")
-        track(default, kind="subtitles", label="Default", ref="caption", src="/static/empty.vtt")
+        track(default, label="Default", ref="caption", src="/static/empty.vtt")
       shortcut(v-show="stage === 'edit'")
   footer.footer
     | Originially implemented by&nbsp;
@@ -87,6 +87,7 @@ export default {
   },
   data() {
     return {
+      modalText: '',
       modalShow: false,
       stage: 'prepare',
       subtitleText: '',
@@ -235,7 +236,8 @@ export default {
       try {
         const converter = new VTTConverter(blob);
         const url = await converter.getURL();
-        this.$refs.caption.setAttribute('src', url);
+        this.$refs.caption.src = url;
+        this.$refs.caption.mode = 'showing';
         this.$refs.video.load();
       } catch (_e) {
         this.modalShow = true;
