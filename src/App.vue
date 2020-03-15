@@ -64,13 +64,14 @@
         track(default, label="Default", ref="caption", src="/static/empty.vtt")
       shortcut(v-show="stage === 'edit'")
   footer.footer
-    | Originially implemented by&nbsp;
-    a(href="https://github.com/wiwikuan/")
-      | @wiwikuan
-    | , and refactored by&nbsp;
-    a(href="https://github.com/dsh0416/")
-      | @dsh0416
-    | &nbsp;with ❤️️.
+    p.footer-p
+      | Originially implemented by&nbsp;
+      a(href="https://github.com/wiwikuan/")
+        | @wiwikuan
+      | , and refactored by&nbsp;
+      a(href="https://github.com/dsh0416/")
+        | @dsh0416
+      | &nbsp;with ❤️️.
 </template>
 
 <script>
@@ -272,13 +273,16 @@ export default {
 
 <style lang="stylus" scoped>
 .container
-  display flex
   margin 20px
+  @media (min-width: 800px)
+    display flex
 .hidden
   display none
 .panel
-  flex 1
-  margin 10px
+  width 100%
+  margin 10px 10px 85px 10px
+  @media (min-width: 800px)
+    flex 1
 .uk-textarea
   resize vertical
 .video
@@ -289,8 +293,9 @@ export default {
   position fixed
   left 0
   bottom 0
+  right 0
   width 100%
-  padding 20px
+  padding 20px 0 0 0
   background-color #eee
   color #000
   text-align center
