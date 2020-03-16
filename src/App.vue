@@ -13,15 +13,17 @@
     .panel
       div(v-if="stage === 'prepare'")
         input.hidden(type="file", ref="textLoader", accept="text/plain", @change="readText")
-        vk-button(@click="loadText")
+        vk-button.inline-button(@click="loadText")
           | {{ $t("loadTextFile") }}
+        vk-button.inline-button(type="primary", @click="startEdit")
+          | {{ $t("startEditing") }}
         .uk-margin
           textarea.uk-textarea(rows="20", v-model="subtitleText")
         p.uk-margin
           | {{ $t("linesOfSubtitle") }}{{ subtitleText.split('\n').length }} {{ $t("lines") }}
-        vk-button.uk-margin(type="primary", @click="startEdit")
-          | {{ $t("startEditing") }}
       div(v-if="stage === 'edit'")
+        vk-button.uk-margin(type="primary", @click="startReview")
+          | {{ $t("startReviewing") }}
         h4
           | {{ $t("reactTime") }}{{ reactTime }}s
         input.uk-range(type="range", min="0.0" max="1.0", step="0.01", v-model="reactTime")
@@ -37,19 +39,16 @@
           | {{ subtitle }}
         h4.alt-text(v-if="nextLines.length < 4")
           | {{ $t("eofHint") }}
-        vk-button.uk-margin(type="primary", @click="startReview")
-          | {{ $t("startReviewing") }}
       div(v-if="stage === 'review'")
-        textarea.uk-textarea(rows="20", v-model="subtitleReview")
-        .uk-margin
-          vk-button(@click="updatePreview")
-            | {{ $t("updatePreview") }}
-        .uk-margin
-          vk-button(type="primary", @click="saveSrt")
-            | {{ $t("saveSrt") }}
-        .uk-margin
-          vk-button(type="primary", @click="saveVtt")
-            | {{ $t("saveVtt") }}
+        vk-button.inline-button(@click="updatePreview")
+          | {{ $t("updatePreview") }}
+        vk-button.inline-button(type="primary", @click="backToEdit")
+          | Back to Edit Mode
+        textarea.uk-margin.uk-textarea(rows="20", v-model="subtitleReview")
+        vk-button.inline-button(type="primary", @click="saveSrt")
+          | {{ $t("saveSrt") }}
+        vk-button.inline-button(type="primary", @click="saveVtt")
+          | {{ $t("saveVtt") }}
         a.hidden(ref="download", href="")
     .panel
       input.hidden(
@@ -144,6 +143,7 @@ export default {
         this.subtitleStarts = new Array(this.subtitles.length).fill(null);
         this.subtitleEnds = new Array(this.subtitles.length).fill(null);
         this.stage = 'edit';
+        this.$refs.video.load();
         window.addEventListener('keypress', this.keyHandler);
       }
     },
@@ -242,6 +242,12 @@ export default {
         this.modalText = this.$t('invalidSrt');
       }
     },
+    backToEdit() {
+      this.$refs.caption.src = '/static/empty.vtt';
+      this.$refs.video.load();
+      this.stage = 'edit';
+      window.addEventListener('keypress', this.keyHandler);
+    },
     saveSrt() {
       const a = this.$refs.download;
       const file = new Blob([this.subtitleReview], { type: 'text/plain' });
@@ -281,6 +287,9 @@ export default {
   margin 10px 10px 85px 10px
   @media (min-width: 800px)
     flex 1
+.inline-button
+  display inline-block
+  margin 0 10px 10px 0
 .uk-textarea
   resize vertical
 .video
