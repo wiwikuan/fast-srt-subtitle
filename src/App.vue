@@ -205,6 +205,18 @@ export default {
             this.nextLine = this.nextLine + 1;
           }
           break;
+        case 'w':
+          this.keyHandler({ key: 'i' });
+          break;
+        case 'a':
+          this.keyHandler({ key: 'u' });
+          break;
+        case 's':
+          this.keyHandler({ key: 'o' });
+          break;
+        case 'd':
+          this.keyHandler({ key: 'p' });
+          break;
         default:
           break;
       }

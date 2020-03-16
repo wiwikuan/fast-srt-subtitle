@@ -15,21 +15,29 @@ vk-card.shortcuts
   p.operation(@click="$emit('operate', { key: 'u' })")
     vk-label.shortcut-label
       | U
+    vk-label.shortcut-label
+      | A
     span.shortcut-text
       | {{ $t("shortcutU") }}
   p.operation(@click="$emit('operate', { key: 'p' })")
     vk-label.shortcut-label
       | P
+    vk-label.shortcut-label
+      | D
     span.shortcut-text
       | {{ $t("shortcutP") }}
   p.operation(@click="$emit('operate', { key: 'i' })")
     vk-label.shortcut-label
       | I
+    vk-label.shortcut-label
+      | W
     span.shortcut-text
       | {{ $t("shortcutI") }}
   p.operation(@click="$emit('operate', { key: 'o' })")
     vk-label.shortcut-label
       | O
+    vk-label.shortcut-label
+      | S
     span.shortcut-text
       | {{ $t("shortcutO") }}
 </template>
@@ -44,9 +52,8 @@ export default {
 <style lang="stylus" scoped>
 .shortcut-label
   width 30px
+  margin-right 10px
   text-align center
-.shortcut-text
-  margin-left 10px
 .operation
   cursor pointer
 </style>
