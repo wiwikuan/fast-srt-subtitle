@@ -3,8 +3,7 @@ export default {
   close: '關閉',
 
   loadTextFile: '加載文字字幕',
-  linesOfSubtitle: '字幕行數：',
-  lines: ' 行',
+  lines: '字幕行數：{n} 行',
   startEditing: '開始編輯',
   reactTime: '反應時間：',
   currentLine: '當前字幕',

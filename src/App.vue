@@ -20,7 +20,7 @@
         .uk-margin
           textarea.uk-textarea(rows="20", v-model="subtitleText")
         p.uk-margin
-          | {{ $t("linesOfSubtitle") }}{{ subtitleText.split('\n').length }} {{ $t("lines") }}
+          | {{ $tc("lines", subtitleText.split('\n').length) }}
       div(v-if="stage === 'edit'")
         vk-button.uk-margin(type="primary", @click="startReview")
           | {{ $t("startReviewing") }}

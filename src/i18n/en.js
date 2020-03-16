@@ -3,8 +3,7 @@ export default {
   close: 'Close',
 
   loadTextFile: 'Load Text File',
-  linesOfSubtitle: 'Lines of Subtitle: ',
-  lines: 'line(s)',
+  lines: 'Lines of Subtitle: no line | Lines of Subtitle: {n} line | Lines of Subtitle: {n} lines',
   startEditing: 'Start Editing',
   reactTime: 'React Time: ',
   currentLine: 'Current Line',
