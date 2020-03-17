@@ -1,6 +1,6 @@
 # Fast SRT Subtitle
 
-This project is inspired by [wiwikuan/fast-srt-subtitle](https://github.com/wiwikuan/fast-srt-subtitle). See [this YouTube video](https://github.com/wiwikuan/fast-srt-subtitle) for details.
+This project is inspired by [wiwikuan/fast-srt-subtitle](https://github.com/wiwikuan/fast-srt-subtitle). See [this YouTube video](https://www.youtube.com/watch?v=Ath3BX9DBRs) for details.
 
 ## Demo
 
