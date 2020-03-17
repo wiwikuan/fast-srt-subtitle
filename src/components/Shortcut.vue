@@ -40,6 +40,21 @@ vk-card.shortcuts
       | S
     span.shortcut-text
       | {{ $t("shortcutO") }}
+  p.operation(@click="$emit('operate', { key: 'r' })")
+    vk-label.shortcut-label
+      | R
+    span.shortcut-text
+      | {{ $t("shortcutR") }}
+  p.operation(@click="$emit('operate', { key: 'r' })")
+    vk-label.shortcut-label
+      | Q
+    span.shortcut-text
+      | {{ $t("shortcutQ") }}
+  p.operation(@click="$emit('operate', { key: 'r' })")
+    vk-label.shortcut-label
+      | E
+    span.shortcut-text
+      | {{ $t("shortcutE") }}
 </template>
 
 <script>

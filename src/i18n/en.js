@@ -26,4 +26,7 @@ export default {
   shortcutP: 'Skip 3 Secs',
   shortcutI: 'Prev Line',
   shortcutO: 'Skip Line',
+  shortcutR: 'Pause / Resume',
+  shortcutQ: 'Slow Down',
+  shortcutE: 'Speed Up',
 };

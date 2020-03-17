@@ -27,4 +27,7 @@ export default {
   shortcutP: '快轉 3 秒',
   shortcutI: '返回上一行',
   shortcutO: '跳過當前行',
+  shortcutR: '暫停 / 播放',
+  shortcutQ: '減速播放',
+  shortcutE: '加速播放',
 };

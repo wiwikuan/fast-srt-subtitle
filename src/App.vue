@@ -205,6 +205,23 @@ export default {
             this.nextLine = this.nextLine + 1;
           }
           break;
+        case 'r':
+          if (this.$refs.video.paused) {
+            this.$refs.video.play();
+          } else {
+            this.$refs.video.pause();
+          }
+          break;
+        case 'q':
+          if (this.$refs.video.playbackRate > 0.1) {
+            this.$refs.video.playbackRate -= 0.1;
+          }
+          break;
+        case 'e':
+          if (this.$refs.video.playbackRate < 2.0) {
+            this.$refs.video.playbackRate += 0.1;
+          }
+          break;
         case 'w':
           this.keyHandler({ key: 'i' });
           break;
