@@ -40,7 +40,7 @@ TODO: CONTRIBUTE GUIDE
 
 ## LICENSE
 
-This project is licensed under [MIT License](https://github.com/dsh0416/fast-srt-subtitle/blob/master/LICENSE).
+This project is licensed under [GPLv3](https://github.com/dsh0416/fast-srt-subtitle/blob/master/LICENSE).
 
 ### Dependency License Scan
 
