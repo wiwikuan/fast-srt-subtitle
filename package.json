@@ -1,19 +1,27 @@
 {
   "name": "fast-srt-subtitle",
   "version": "1.0.0",
+  "private": true,
   "description": "A Vue.js project",
   "author": "Delton Ding <dsh0416@gmail.com>",
-  "private": true,
   "scripts": {
-    "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js",
-    "start": "npm run dev",
+    "build": "node build/build.js",
     "lint": "eslint --ext .js,.vue src",
-    "build": "node build/build.js"
+    "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js",
+    "electron:build": "vue-cli-service electron:build",
+    "electron:serve": "vue-cli-service electron:serve",
+    "postinstall": "electron-builder install-app-deps",
+    "postuninstall": "electron-builder install-app-deps",
+    "start": "npm run dev"
   },
+  "main": "background.js",
   "dependencies": {
+    "@vue/cli": "^4.2.3",
+    "@vue/cli-service": "^4.2.3",
     "@vuikit/icons": "^0.8.1",
     "@vuikit/theme": "^0.8.1",
     "pug": "^2.0.4",
+    "pug-plain-loader": "^1.0.0",
     "srt-webvtt": "^1.0.1",
     "stylus": "^0.54.7",
     "stylus-loader": "^3.0.2",
@@ -35,6 +43,7 @@
     "chalk": "^2.0.1",
     "copy-webpack-plugin": "^4.0.1",
     "css-loader": "^0.28.0",
+    "electron": "^6.0.0",
     "eslint": "^4.15.0",
     "eslint-config-airbnb-base": "^11.3.0",
     "eslint-friendly-formatter": "^3.0.0",
@@ -58,6 +67,7 @@
     "shelljs": "^0.7.6",
     "uglifyjs-webpack-plugin": "^1.1.1",
     "url-loader": "^0.5.8",
+    "vue-cli-plugin-electron-builder": "~1.4.6",
     "vue-loader": "^13.3.0",
     "vue-style-loader": "^3.0.1",
     "vue-template-compiler": "^2.5.2",
@@ -66,13 +76,13 @@
     "webpack-dev-server": "^2.9.1",
     "webpack-merge": "^4.1.0"
   },
-  "engines": {
-    "node": ">= 6.0.0",
-    "npm": ">= 3.0.0"
-  },
   "browserslist": [
     "> 1%",
     "last 2 versions",
     "not ie <= 8"
-  ]
+  ],
+  "engines": {
+    "node": ">= 6.0.0",
+    "npm": ">= 3.0.0"
+  }
 }

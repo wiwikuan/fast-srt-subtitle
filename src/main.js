@@ -24,7 +24,6 @@ const i18n = new VueI18n({
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
-  components: { App },
   i18n,
-  template: '<App/>',
+  render: h => h(App),
 });
