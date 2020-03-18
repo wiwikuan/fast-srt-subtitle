@@ -41,7 +41,3 @@ TODO: CONTRIBUTE GUIDE
 ## LICENSE
 
 This project is licensed under [GPLv3](https://github.com/dsh0416/fast-srt-subtitle/blob/master/LICENSE).
-
-### Dependency License Scan
-
-[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fdsh0416%2Ffast-srt-subtitle.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2Fdsh0416%2Ffast-srt-subtitle?ref=badge_large)
