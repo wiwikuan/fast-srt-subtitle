@@ -30,8 +30,14 @@ yarn
 # serve with hot reload at localhost:8080
 yarn dev
 
+# serve with Electron
+yarn electron:serve
+
 # build for production with minification
 yarn build
+
+# build for Electron Apps
+yarn electron:build
 
 # build for production and view the bundle analyzer report
 yarn build --report
