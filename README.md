@@ -1,5 +1,8 @@
 # Fast SRT Subtitle
 
+![Electron CD](https://github.com/dsh0416/fast-srt-subtitle/workflows/Electron%20CD/badge.svg)
+![Github Pages](https://github.com/dsh0416/fast-srt-subtitle/workflows/Github%20Pages/badge.svg)
+
 This project is inspired by [wiwikuan/fast-srt-subtitle](https://github.com/wiwikuan/fast-srt-subtitle). See [this YouTube video](https://www.youtube.com/watch?v=Ath3BX9DBRs) for details.
 
 ## Demo

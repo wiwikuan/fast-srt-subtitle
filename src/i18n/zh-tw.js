@@ -2,6 +2,8 @@ export default {
   error: '錯誤',
   close: '關閉',
 
+  downloadApp: '下載 App',
+
   loadTextFile: '加載文字字幕',
   lines: '字幕行數：{n} 行',
   startEditing: '開始編輯',

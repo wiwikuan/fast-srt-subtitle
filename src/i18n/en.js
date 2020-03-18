@@ -2,6 +2,8 @@ export default {
   error: 'Error',
   close: 'Close',
 
+  downloadApp: 'Download App',
+
   loadTextFile: 'Load Text File',
   lines: 'Lines of Subtitle: no line | Lines of Subtitle: {n} line | Lines of Subtitle: {n} lines',
   startEditing: 'Start Editing',
