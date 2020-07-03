@@ -16,7 +16,6 @@ let srt = "";
 function preload() {
   vid = createVideo(vidFile);
   vid.size(640, 320);
-  vid.showControls();
   subText = loadStrings(subFile);
 }
 
@@ -75,12 +74,17 @@ function keyPressed() {
     // Q : Make SRT
     makeSRT();
   } else if (keyCode === 85) { // U
-    vid.elt.currentTime -= 3;
+    vid.elt.currentTime -= 2;
 
   } else if (keyCode === 80) { // P
-    vid.elt.currentTime += 3;
+    vid.elt.currentTime += 2;
 
   }
+}
+
+function pad(num, size) {
+    var s = "000000000" + num;
+    return s.substr(s.length-size);
 }
 
 function makeSRT() {
@@ -95,10 +99,12 @@ function makeSRT() {
     sm = floor((lineStartTime[i] % 3600) / 60);
     ss = floor(lineStartTime[i] % 60);
     sms = floor((lineStartTime[i] * 1000) % 1000);
+    sms = pad(sms, 3);
     eh = floor(lineEndTime[i] / 3600);
     em = floor((lineEndTime[i] % 3600) / 60);
     es = floor(lineEndTime[i] % 60);
     ems = floor((lineEndTime[i] * 1000) % 1000);
+    ems = pad(ems, 3);
 
     srt += `${sh}:${sm}:${ss},${sms} --> ${eh}:${em}:${es},${ems}\n`
     srt += subText[i];
