@@ -32,6 +32,8 @@ jobs:
         run: |
           yarn install
       - name: Publish
+        env:
+          USE_HARD_LINKS: "false"
         run: |
           yarn electron:build
       - name: Cleanup artifacts macOS
