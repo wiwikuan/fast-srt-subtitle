@@ -16,7 +16,7 @@ function clamp(num) {
 }
 
 const keyMap = {
-  /* K */ '75': video => {
+  'k': video => {
     if (currentStamping >= lines.length) {
       return;
     }
@@ -29,21 +29,21 @@ const keyMap = {
         : null;
     currentStamping += 1;
   },
-  /* L */ '76': video => {
+  'l': video => {
     lines[currentStamping] = [
       lines[currentStamping][0],
       video.currentTime - reactTime
     ];
   },
-  /* I */ '73': () => {
+  'i': () => {
     currentStamping -= 1;
   },
-  /* O*/ '79': () => {
+  'o': () => {
     currentStamping += 1;
   },
-  /* U*/ '85': () => (video.currentTime -= 3),
-  /* P */ '80': () => (video.currentTime += 3),
-  /* Q */ '81': () => makeSRT()
+  'u': () => (video.currentTime -= 3),
+  'p': () => (video.currentTime += 3),
+  'q': () => makeSRT()
 };
 
 function getCurrentStatus() {
@@ -52,7 +52,7 @@ function getCurrentStatus() {
 
 function execHotkey(keyMap) {
   document.addEventListener('keypress', function(e) {
-    const execFn = keyMap[e.keyCode];
+    const execFn = keyMap[e.key.toLowerCase()];
     if (typeof execFn === 'function') {
       execFn(video);
       updateContent();
