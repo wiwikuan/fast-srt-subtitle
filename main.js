@@ -22,11 +22,10 @@ const keyMap = {
     }
 
     lines[currentStamping + 1][0] = clamp(video.currentTime - reactTime);
-    lines[currentStamping][1] =
-      lines[currentStamping][1] > video.currentTime - reactTime ||
-      lines[currentStamping][1] === null
-        ? clamp(video.currentTime - 0.03 - reactTime)
-        : null;
+    if (lines[currentStamping][1] > video.currentTime - reactTime || lines[currentStamping][1] === null){
+      lines[currentStamping][1] = clamp(video.currentTime - 0.03 - reactTime);
+    }
+
     currentStamping += 1;
   },
   'l': video => {
@@ -41,8 +40,8 @@ const keyMap = {
   'o': () => {
     currentStamping += 1;
   },
-  'u': () => (video.currentTime -= 3),
-  'p': () => (video.currentTime += 3),
+  'u': () => (video.currentTime -= 2),
+  'p': () => (video.currentTime += 2),
   'q': () => makeSRT()
 };
 
