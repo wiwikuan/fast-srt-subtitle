@@ -123,14 +123,15 @@ function makeSRT() {
     let eh, em, es, ems;
     const [timeStart, timeEnd] = lines[i];
     const leftPad = str => `${str}`.padStart(2, '0');
+    const leftPad3 = str => `${str}`.padStart(3, '0');
     sh = leftPad(Math.floor(timeStart / 3600));
     sm = leftPad(Math.floor((timeStart % 3600) / 60));
     ss = leftPad(Math.floor(timeStart % 60));
-    sms = leftPad(Math.floor((timeStart * 1000) % 1000));
+    sms = leftPad3(Math.floor((timeStart * 1000) % 1000));
     eh = leftPad(Math.floor(timeEnd / 3600));
     em = leftPad(Math.floor((timeEnd % 3600) / 60));
     es = leftPad(Math.floor(timeEnd % 60));
-    ems = leftPad(Math.floor((timeEnd * 1000) % 1000));
+    ems = leftPad3(Math.floor((timeEnd * 1000) % 1000));
 
     srt += `${sh}:${sm}:${ss},${sms} --> ${eh}:${em}:${es},${ems}\n`;
     srt += subTexts[i];
