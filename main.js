@@ -42,7 +42,8 @@ const keyMap = {
   },
   'u': () => (video.currentTime -= 2),
   'p': () => (video.currentTime += 2),
-  'q': () => makeSRT()
+  'q': () => makeSRT(),
+  ' ': () => PlayORPause()
 };
 
 function getCurrentStatus() {
@@ -104,6 +105,7 @@ function handleFileUpload(e) {
       video.src = URL.createObjectURL(file);
     }
   }
+  document.getElementById('video').focus(); // 選擇檔案後把焦點給video以免按空白鍵時彈出選擇畫面
 }
 
 videoInput.addEventListener('change', handleFileUpload);
@@ -148,4 +150,14 @@ function makeSRT() {
   a.click();
   URL.revokeObjectURL(a.href);
   a.remove();
+}
+
+function PlayORPause() {
+  if (document.activeElement !== document.getElementById('video')) {
+    if (video.paused === true) {
+      video.play();
+    } else {
+      video.pause();
+    }
+  }
 }
