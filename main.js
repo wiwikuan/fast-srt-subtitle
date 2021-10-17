@@ -105,7 +105,7 @@ function handleFileUpload(e) {
       video.src = URL.createObjectURL(file);
     }
   }
-  document.getElementById('video').focus(); // 選擇檔案後把焦點給video以免按空白鍵時彈出選擇畫面
+  document.getElementById('video').focus();
 }
 
 videoInput.addEventListener('change', handleFileUpload);
