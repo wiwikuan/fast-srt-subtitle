@@ -22,7 +22,7 @@ const keyMap = {
     }
 
     lines[currentStamping + 1][0] = clamp(video.currentTime - reactTime);
-    if (lines[currentStamping][1] > video.currentTime - reactTime || lines[currentStamping][1] === null){
+    if (lines[currentStamping][1] > video.currentTime - reactTime || lines[currentStamping][1] === null) {
       lines[currentStamping][1] = clamp(video.currentTime - 0.03 - reactTime);
     }
 
@@ -51,7 +51,7 @@ function getCurrentStatus() {
 }
 
 function execHotkey(keyMap) {
-  document.addEventListener('keypress', function(e) {
+  document.addEventListener('keypress', function (e) {
     const execFn = keyMap[e.key.toLowerCase()];
     if (typeof execFn === 'function') {
       execFn(video);
@@ -83,7 +83,7 @@ function handleFileUpload(e) {
       if it's srt file, fill text area with srt content
       if it's video, load it into video tag
     */
-    reader.onload = function() {
+    reader.onload = function () {
       if (e.target.id === SRT_ID) {
         subTexts = reader.result.split('\n');
         subTexts.forEach((_, i) => (lines[i] = [null, null]));
@@ -95,7 +95,7 @@ function handleFileUpload(e) {
       }
     };
 
-    reader.onerror = function() {
+    reader.onerror = function () {
       alert('無法讀取檔案！');
     };
 
@@ -111,7 +111,7 @@ function handleFileUpload(e) {
 videoInput.addEventListener('change', handleFileUpload);
 srtInput.addEventListener('change', handleFileUpload);
 
-video.addEventListener('timeupdate', function(e) {
+video.addEventListener('timeupdate', function (e) {
   status.textContent = getCurrentStatus();
 });
 
@@ -151,6 +151,11 @@ function makeSRT() {
   URL.revokeObjectURL(a.href);
   a.remove();
 }
+
+document.getElementById('MakeSrtBtn').addEventListener('click', function () {
+  makeSRT();
+  document.getElementById('video').focus();
+});
 
 function PlayORPause() {
   if (document.activeElement !== document.getElementById('video')) {
