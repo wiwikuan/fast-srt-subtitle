@@ -3,6 +3,7 @@
 
 <head>
   <meta charset="UTF-8" />
+  <script src="https://unpkg.com/wavesurfer.js"></script>
 
   <style>
     .header {
@@ -17,6 +18,11 @@
     }
 
     .video {
+      width: 100%;
+      float: left;
+    }
+
+    #waveform {
       width: 100%;
       float: left;
     }
@@ -61,6 +67,7 @@
     <p>
       <video class="video" id="video" controls></video>
     </p>
+    <div id="waveform"></div>
     <button id="MakeSrtBtn">匯出 SRT 檔</button>
   </div>
 </body>

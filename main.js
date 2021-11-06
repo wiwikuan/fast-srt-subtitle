@@ -103,6 +103,8 @@ function handleFileUpload(e) {
       reader.readAsText(file);
     } else {
       video.src = URL.createObjectURL(file);
+      var objectURL = URL.createObjectURL(file); //載入影片時使wavesurfer也載入影片
+      wavesurfer.load(objectURL);
     }
   }
   document.getElementById('video').focus();
@@ -113,6 +115,7 @@ srtInput.addEventListener('change', handleFileUpload);
 
 video.addEventListener('timeupdate', function (e) {
   status.textContent = getCurrentStatus();
+  wavesurfer.seekTo(video.currentTime / wavesurfer.getDuration()); //影片時間線更新時也會更新wavesurfer的時間線
 });
 
 function makeSRT() {
@@ -166,3 +169,46 @@ function PlayORPause() {
     }
   }
 }
+
+var wavesurfer = WaveSurfer.create({
+  container: '#waveform',
+  barWidth: 1,
+  height: 100 //默認128
+});
+
+var pxPerSec = 40;
+
+wavesurfer.on('ready', function() {
+wavesurfer.zoom(pxPerSec); //根據pxPerSec縮放波形圖，pxPerSec代表每秒有幾像素，越大越寬
+wavesurfer.setMute(true); //波形圖本身也是一個聲音的撥放器因此把聲音靜音
+document.getElementById('subtainer').style.width = Math.round(pxPerSec*wavesurfer.getDuration()) + 'px';
+});
+
+function UpdateLoadingFlag(Percentage) {
+if (document.getElementById("status")) {
+document.getElementById("status").innerText = "Loading " + Percentage + "%";
+}
+}
+
+wavesurfer.on('loading', function(Percentage) { //波形圖載入時在status顯示載入百分比
+UpdateLoadingFlag(Percentage);
+});
+
+video.addEventListener('play', function () {
+wavesurfer.play();
+});
+
+video.addEventListener('pause', function () {
+wavesurfer.pause();
+wavesurfer.seekTo(video.currentTime / wavesurfer.getDuration());
+});
+
+wavesurfer.on('seek', function(seekprogress) { //這裡用比較奇怪的方法完成波形圖與影片時間線的同步，要解決這個問題就不能使用瀏覽器內建的影片撥放控制器，要自制撥放、暫停...等等的按鈕，先這樣應急
+if (video.paused === true && Math.abs(video.currentTime - seekprogress*wavesurfer.getDuration()) > 0.00001){ //影片暫停時才能精細的調整時間，但時間差距不能小於0.00001秒，以免無限的迴圈
+video.currentTime = seekprogress*wavesurfer.getDuration();
+}
+if (Math.abs(video.currentTime - seekprogress*wavesurfer.getDuration()) > 0.3) { //當點擊波形圖更改時間線時，時間差距要大於0.3秒才會觸發，並且影片會暫停，影片播放時也會更新時間線所以設定0.3秒做為門檻
+video.pause();
+video.currentTime = seekprogress*wavesurfer.getDuration();
+}
+});
