@@ -247,12 +247,12 @@ function MakeSub(SubSequence) {
   }
 }
 
-function Kkeyfunction(video,reactTime) {
+function Kkeyfunction(video, reactTime) {
   if (currentStamping >= lines.length) {
     return;
   }
   lines[currentStamping + 1][0] = clamp(video.currentTime - reactTime);
-  if(currentStamping >= 0) {
+  if (currentStamping >= 0) {
     if (lines[currentStamping][1] > video.currentTime - reactTime || lines[currentStamping][1] === null) {
       lines[currentStamping][1] = clamp(video.currentTime - 0.03 - reactTime);
     }
@@ -267,7 +267,7 @@ function Lkeyfunction(video, reactTime) {
     lines[currentStamping][0],
     video.currentTime - reactTime
   ];
-  if(lines[currentStamping][1] > lines[currentStamping + 1][0] && (lines[currentStamping + 1][0] !== null)) {
+  if (lines[currentStamping][1] > lines[currentStamping + 1][0] && (lines[currentStamping + 1][0] !== null)) {
     lines[currentStamping + 1][0] = clamp(lines[currentStamping][1] + 0.03);
   }
   MakeSub(currentStamping);
