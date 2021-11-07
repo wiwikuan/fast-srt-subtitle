@@ -273,3 +273,59 @@ function Lkeyfunction(video, reactTime) {
   MakeSub(currentStamping);
   MakeSub(currentStamping + 1);
 }
+
+document.getElementById("subtainer").addEventListener('mousedown', function (e) { //用事件代理監聽字幕條兩端的拖動元素，這樣不用註冊很多監聽器，當拖動完成後會更新時間，如同K鍵,L鍵的效果
+  var OmouseX = e.pageX;
+  var PID = e.target.parentNode.id;
+  var SubSequence = PID.substr(3);
+  document.getElementById(PID).style.zIndex = 1; //使字幕條拖動時不會被遮擋，當拖動停止後會更新時間並用K鍵,L鍵更新元素，所以新的元素不會有zIndex，以後的元素不會被新元素遮擋
+  var newWidth;
+  if (e.target.className.toLowerCase() == 'subleft') {
+    window.addEventListener('mousemove', Lresize);
+    window.addEventListener('mouseup', stopLresize);
+
+    function Lresize(e) {
+      document.getElementById(PID).style.width = (SubWidth[SubSequence] - e.pageX + OmouseX) + "px";
+      document.getElementById(PID).style.left = (SubLeft[SubSequence] + e.pageX - OmouseX) + "px";
+    }
+
+    function stopLresize() {
+      window.removeEventListener('mousemove', Lresize);
+      window.removeEventListener('mouseup', stopLresize);
+
+      GetnewWidth();
+      currentStamping = (Number(SubSequence) - 1);
+      video.currentTime = (SubWidth[SubSequence] - newWidth + SubLeft[SubSequence]) / pxPerSec;
+      Kkeyfunction(video, 0);
+      updateContent();
+    }
+  }
+
+  if (e.target.className.toLowerCase() == 'subright') {
+    window.addEventListener('mousemove', Rresize);
+    window.addEventListener('mouseup', stopRresize);
+
+    function Rresize(e) {
+      document.getElementById(PID).style.width = (SubWidth[SubSequence] + e.pageX - OmouseX) + "px";
+    }
+
+    function stopRresize() {
+      window.removeEventListener('mousemove', Rresize);
+      window.removeEventListener('mouseup', stopRresize);
+
+      GetnewWidth();
+      currentStamping = Number(SubSequence);
+      video.currentTime = (newWidth + SubLeft[SubSequence]) / pxPerSec;
+      Lkeyfunction(video, 0);
+      updateContent();
+    }
+  }
+
+  function GetnewWidth() {  //當拖動停止時取得目前的新寬度，但是最低不會低於10px
+    newWidth = Number(document.getElementById(PID).style.width.split('px')[0]);
+    if (newWidth < 10) {
+      newWidth = 10;
+    }
+  }
+
+});
