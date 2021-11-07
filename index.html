@@ -32,6 +32,55 @@
       float: right;
     }
 
+    #subbox {
+      width: 100%;
+      float: left;
+      overflow-x: hidden;
+      height: 40px;
+      position: relative;
+    }
+
+    #subtainer {
+      background: Gray;
+      width: 100%;
+      height: 20px;
+      position: absolute;
+      top: 50%;
+      transform: translate(0, -50%);
+    }
+
+    .subleft {
+      float: left;
+      width: 5px;
+      height: 100%;
+      cursor: url("Lcursor.png") 12 12, col-resize;
+      transition: 0.2s;
+    }
+
+    .subleft:hover {
+      float: left;
+      width: 5px;
+      height: 100%;
+      background: Magenta;
+      cursor: url("Lcursor.png") 12 12, col-resize;
+    }
+
+    .subright {
+      float: right;
+      width: 5px;
+      height: 100%;
+      cursor: url("Rcursor.png") 12 12, col-resize;
+      transition: 0.2s;
+    }
+
+    .subright:hover {
+      float: right;
+      width: 5px;
+      height: 100%;
+      background: Yellow;
+      cursor: url("Rcursor.png") 12 12, col-resize;
+    }
+
     .right {
       float: right;
       width: 49%;
@@ -49,6 +98,9 @@
     <p>
       <video class="video" id="video" controls></video>
     </p>
+    <div id="subbox">
+      <div id="subtainer"></div>
+    </div>
     <div id="waveform"></div>
     <button id="MakeSrtBtn">匯出 SRT 檔</button>
   </div>

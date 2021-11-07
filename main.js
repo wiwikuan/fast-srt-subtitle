@@ -185,7 +185,7 @@ var pxPerSec = 40;
 wavesurfer.on('ready', function () {
   wavesurfer.zoom(pxPerSec); //根據pxPerSec縮放波形圖，pxPerSec代表每秒有幾像素，越大越寬
   wavesurfer.setMute(true); //波形圖本身也是一個聲音的撥放器因此把聲音靜音
-  document.getElementById('subtainer').style.width = Math.round(pxPerSec * wavesurfer.getDuration()) + 'px';
+  document.getElementById('subtainer').style.width = Math.round(pxPerSec * wavesurfer.getDuration()) + 'px'; //載入完成後改變字幕軸寬度使之與波形圖一致
 });
 
 function UpdateLoadingFlag(Percentage) {
@@ -224,3 +224,37 @@ document.getElementById("checkbox").addEventListener('change', function () {
     reactTime = 0;
   }
 });
+
+wavesurfer.on('scroll', function (e) {
+  document.getElementById('subbox').scrollLeft = e.target.scrollLeft;
+});
+
+var SubWidth = [];
+var SubLeft = [];
+
+function MakeSub(SubSequence) {
+  if (SubSequence < 0) {
+    return;
+  }
+  if ((lines[SubSequence][0] !== null) && (lines[SubSequence][1] !== null)) {
+    if (document.getElementById('sub' + (SubSequence)) !== null) { //新增字幕條時如果已經存在舊的字幕條將刪除舊字幕條
+      document.getElementById('sub' + (SubSequence)).remove();
+    }
+    SubWidth[SubSequence] = pxPerSec * (lines[SubSequence][1] - lines[SubSequence][0]);
+    SubLeft[SubSequence] = pxPerSec * lines[SubSequence][0];
+
+    var div = document.createElement("div");
+    div.setAttribute('id', 'sub' + (SubSequence));
+    div.style.overflow = "hidden";
+    div.style.fontSize = "100%";
+    div.style.background = "Cyan";
+    div.style.height = "100%";
+    div.style.position = "absolute";
+    div.style.border = "1px #000000 solid";
+    div.style.userSelect = "none";
+    div.style.left = pxPerSec * lines[SubSequence][0] + "px";
+    div.style.width = pxPerSec * (lines[SubSequence][1] - lines[SubSequence][0]) + "px";
+    div.innerHTML = '<div class="subleft"></div><div class="subright"></div>' + subTexts[SubSequence];
+    document.getElementById("subtainer").appendChild(div);
+  }
+}
