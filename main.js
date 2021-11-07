@@ -35,10 +35,14 @@ const keyMap = {
     ];
   },
   'i': () => {
-    currentStamping -= 1;
+    if (currentStamping != 0) {
+      currentStamping -= 1;
+      status.textContent = getCurrentStatus();
+    }
   },
   'o': () => {
     currentStamping += 1;
+    status.textContent = getCurrentStatus();
   },
   'u': () => (video.currentTime -= 2),
   'p': () => (video.currentTime += 2),
