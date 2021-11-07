@@ -41,6 +41,17 @@
 
 <body>
   <div class="header">選取字幕檔以及影片檔案開始製作 SRT！</div>
+  <div class="left">
+    <label>
+      <span>選擇影片檔案：</span>
+      <input id="videoFile" type="file" name="videoFile" placeholder="點擊上傳影片檔" />
+    </label>
+    <p>
+      <video class="video" id="video" controls></video>
+    </p>
+    <div id="waveform"></div>
+    <button id="MakeSrtBtn">匯出 SRT 檔</button>
+  </div>
   <div class="right">
     <p id="status">Test Text.</p>
     <textarea id="textArea" rows="10" cols="80">預設的字。</textarea>
@@ -59,17 +70,6 @@
       Forward | U: Rewind | P: Forward | Q: Make SRT File
     </p>
     <input type="checkbox" id="checkbox" checked="checked">Reaction Time
-  </div>
-  <div class="left">
-    <label>
-      <span>選擇影片檔案：</span>
-      <input id="videoFile" type="file" name="videoFile" placeholder="點擊上傳影片檔" />
-    </label>
-    <p>
-      <video class="video" id="video" controls></video>
-    </p>
-    <div id="waveform"></div>
-    <button id="MakeSrtBtn">匯出 SRT 檔</button>
   </div>
 </body>
 <script src="main.js"></script>
