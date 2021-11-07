@@ -6,7 +6,7 @@ const videoInput = document.querySelector('#videoFile');
 const video = document.querySelector('#video');
 const textArea = document.querySelector('#textArea');
 const status = document.querySelector('#status');
-const reactTime = 0.4;
+let reactTime = 0.4;
 let subTexts = [];
 let currentStamping = 0;
 let lines = [];
@@ -210,5 +210,13 @@ wavesurfer.on('seek', function (seekprogress) { //這裡用比較奇怪的方法
   if (Math.abs(video.currentTime - seekprogress * wavesurfer.getDuration()) > 0.3) { //當點擊波形圖更改時間線時，時間差距要大於0.3秒才會觸發，並且影片會暫停，影片播放時也會更新時間線所以設定0.3秒做為門檻
     video.pause();
     video.currentTime = seekprogress * wavesurfer.getDuration();
+  }
+});
+
+document.getElementById("checkbox").addEventListener('change', function () {
+  if (this.checked) {
+    reactTime = 0.4;
+  } else {
+    reactTime = 0;
   }
 });
