@@ -17,22 +17,10 @@ function clamp(num) {
 
 const keyMap = {
   'k': video => {
-    if (currentStamping >= lines.length) {
-      return;
-    }
-
-    lines[currentStamping + 1][0] = clamp(video.currentTime - reactTime);
-    if (lines[currentStamping][1] > video.currentTime - reactTime || lines[currentStamping][1] === null) {
-      lines[currentStamping][1] = clamp(video.currentTime - 0.03 - reactTime);
-    }
-
-    currentStamping += 1;
+    Kkeyfunction(video, reactTime);
   },
   'l': video => {
-    lines[currentStamping] = [
-      lines[currentStamping][0],
-      video.currentTime - reactTime
-    ];
+    Lkeyfunction(video, reactTime);
   },
   'i': () => {
     if (currentStamping != 0) {
@@ -257,4 +245,31 @@ function MakeSub(SubSequence) {
     div.innerHTML = '<div class="subleft"></div><div class="subright"></div>' + subTexts[SubSequence];
     document.getElementById("subtainer").appendChild(div);
   }
+}
+
+function Kkeyfunction(video,reactTime) {
+  if (currentStamping >= lines.length) {
+    return;
+  }
+  lines[currentStamping + 1][0] = clamp(video.currentTime - reactTime);
+  if(currentStamping >= 0) {
+    if (lines[currentStamping][1] > video.currentTime - reactTime || lines[currentStamping][1] === null) {
+      lines[currentStamping][1] = clamp(video.currentTime - 0.03 - reactTime);
+    }
+  }
+  MakeSub(currentStamping);
+  MakeSub(currentStamping + 1);
+  currentStamping += 1;
+}
+
+function Lkeyfunction(video, reactTime) {
+  lines[currentStamping] = [
+    lines[currentStamping][0],
+    video.currentTime - reactTime
+  ];
+  if(lines[currentStamping][1] > lines[currentStamping + 1][0] && (lines[currentStamping + 1][0] !== null)) {
+    lines[currentStamping + 1][0] = clamp(lines[currentStamping][1] + 0.03);
+  }
+  MakeSub(currentStamping);
+  MakeSub(currentStamping + 1);
 }
