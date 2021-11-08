@@ -42,15 +42,25 @@ function getCurrentStatus() {
   return `Stamping Line ${currentStamping} | Playhead: ${video.currentTime}`;
 }
 
+var IsHold = 0;
+
 function execHotkey(keyMap) {
   document.addEventListener('keypress', function (e) {
+    if (IsInput !== 0 || IsHold !== 0) { //IsInput跟IsHold同時等於0時，才會往下執行，防止輸入字幕時觸發鍵盤事件，與按住鍵盤時連續觸發
+      return;
+    }
     const execFn = keyMap[e.key.toLowerCase()];
     if (typeof execFn === 'function') {
       execFn(video);
       updateContent();
     }
+    IsHold += 1;
   });
 }
+
+document.addEventListener('keyup', function () {
+  IsHold = 0;
+});
 
 function updateContent() {
   const head = '** 目前 ---> ';
