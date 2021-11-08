@@ -329,3 +329,68 @@ document.getElementById("subtainer").addEventListener('mousedown', function (e) 
   }
 
 });
+
+var IsInput = 0; //檢測現在是否有開啟的輸入框
+
+document.getElementById("subtainer").addEventListener('dblclick', function (e) { //雙擊字幕條本體可以產生輸入框，輸入後的內容會改變subTexts裡的內容，也可以取消
+
+  if (IsInput === 0 && e.target.id !== "subtainer") { //目前有輸入框時不會動作，啟動後IsInput會設為1，關閉後IsInput會重新設定為0
+    IsInput = 1;
+    var input = document.createElement("input");
+    var button = document.createElement("button");
+    var SubSequence = e.target.id.substr(3);
+    var InputID = e.target.id + 'input';
+
+    MakeInput();
+    MakeBtn();
+
+    currentStamping = Number(SubSequence);
+    updateContent();
+
+    document.getElementById(InputID).addEventListener('keydown', PressEnter);
+    document.getElementById("MakeBtnID").addEventListener('click', PressBtn);
+
+  }
+
+  function MakeInput() {
+    createInputAndBtn(input, InputID, SubLeft[SubSequence]);
+    input.value = subTexts[SubSequence];
+    document.getElementById(InputID).focus();
+  }
+
+  function MakeBtn() {
+    createInputAndBtn(button, "MakeBtnID", 170 + SubLeft[SubSequence]); //預設輸入框的長度為170px為了不擋到輸入框將取消鈕距離左邊+170px
+    button.innerHTML = '取消';
+  }
+
+  function createInputAndBtn(ele, eleID, eleLeft) {
+    ele.setAttribute('id', eleID);
+    document.getElementById("subtainer").appendChild(ele);
+    ele.style.zIndex = 1;
+    ele.style.position = "absolute";
+    ele.style.height = "110%";
+    ele.style.left = eleLeft + "px";
+  }
+
+  function PressEnter(e) {
+    if (e.keyCode === 13) { // Enter的keyCode是13
+      removeInputAndBtn();
+      subTexts[SubSequence] = input.value + '\n';
+      MakeSub(currentStamping);
+      updateContent();
+    }
+  }
+
+  function PressBtn() {
+    removeInputAndBtn();
+  }
+
+  function removeInputAndBtn() {
+    document.getElementById("MakeBtnID").removeEventListener('click', PressBtn);
+    document.getElementById(InputID).removeEventListener('keydown', PressEnter);
+    document.getElementById("MakeBtnID").remove();
+    document.getElementById(InputID).remove();
+    IsInput = 0;
+  }
+
+});
