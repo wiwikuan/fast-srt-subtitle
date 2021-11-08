@@ -43,6 +43,7 @@ function getCurrentStatus() {
 }
 
 var IsHold = 0;
+var IsAllowRepeatKey = { 'i': true, 'o': true, 'u': true, 'p': true };
 
 function execHotkey(keyMap) {
   document.addEventListener('keypress', function (e) {
@@ -54,7 +55,9 @@ function execHotkey(keyMap) {
       execFn(video);
       updateContent();
     }
-    IsHold += 1;
+    if (!IsAllowRepeatKey[e.key.toLowerCase()]) { //不允許連按的按鍵IsHold會+1，防止連續觸發，允許連按的按鍵IsHold不會變，所以依然會連續觸發
+      IsHold += 1;
+    }
   });
 }
 
