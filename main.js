@@ -260,7 +260,7 @@ function MakeSub(SubSequence) {
   }
 }
 
-function Kkeyfunction(video, reactTime) {
+function Kkeyfunction(video, reactTime = 0) {
   if (currentStamping >= lines.length) {
     return;
   }
@@ -275,7 +275,7 @@ function Kkeyfunction(video, reactTime) {
   currentStamping += 1;
 }
 
-function Lkeyfunction(video, reactTime) {
+function Lkeyfunction(video, reactTime = 0) {
   lines[currentStamping] = [
     lines[currentStamping][0],
     video.currentTime - reactTime
@@ -309,7 +309,7 @@ document.getElementById("subtainer").addEventListener('mousedown', function (e) 
       GetnewWidth();
       currentStamping = (Number(SubSequence) - 1);
       video.currentTime = (SubWidth[SubSequence] - newWidth + SubLeft[SubSequence]) / pxPerSec;
-      Kkeyfunction(video, 0);
+      Kkeyfunction(video);
       updateContent();
     }
   }
@@ -329,7 +329,7 @@ document.getElementById("subtainer").addEventListener('mousedown', function (e) 
       GetnewWidth();
       currentStamping = Number(SubSequence);
       video.currentTime = (newWidth + SubLeft[SubSequence]) / pxPerSec;
-      Lkeyfunction(video, 0);
+      Lkeyfunction(video);
       updateContent();
     }
   }
