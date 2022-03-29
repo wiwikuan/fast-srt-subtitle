@@ -91,6 +91,11 @@ function handleFileUpload(e) {
     reader.onload = function () {
       if (e.target.id === SRT_ID) {
         subTexts = reader.result.split('\n');
+
+        subTexts = subTexts.filter(function(item) { //自動刪除空白行
+          return item != "" && item != "\r";
+        });
+
         subTexts.forEach((_, i) => (lines[i] = [null, null]));
         lines[0][0] = 0;
 
@@ -264,15 +269,22 @@ function Kkeyfunction(video, reactTime = 0) {
   if (currentStamping >= lines.length) {
     return;
   }
-  lines[currentStamping + 1][0] = clamp(video.currentTime - reactTime);
+  
+  if(currentStamping !== lines.length -1){ //幫最後一行上時間標時，防止出現錯誤
+    lines[currentStamping + 1][0] = clamp(video.currentTime - reactTime);
+  }
+
   if (currentStamping >= 0) {
     if (lines[currentStamping][1] > video.currentTime - reactTime || lines[currentStamping][1] === null) {
       lines[currentStamping][1] = clamp(video.currentTime - 0.03 - reactTime);
     }
   }
   MakeSub(currentStamping);
-  MakeSub(currentStamping + 1);
-  currentStamping += 1;
+
+  if(currentStamping !== lines.length -1){
+    MakeSub(currentStamping + 1);
+    currentStamping += 1;
+  }
 }
 
 function Lkeyfunction(video, reactTime = 0) {
@@ -280,11 +292,14 @@ function Lkeyfunction(video, reactTime = 0) {
     lines[currentStamping][0],
     video.currentTime - reactTime
   ];
-  if (lines[currentStamping][1] > lines[currentStamping + 1][0] && (lines[currentStamping + 1][0] !== null)) {
+  if ((currentStamping !== lines.length -1) && lines[currentStamping][1] > lines[currentStamping + 1][0] && (lines[currentStamping + 1][0] !== null)) {
     lines[currentStamping + 1][0] = clamp(lines[currentStamping][1] + 0.03);
   }
   MakeSub(currentStamping);
-  MakeSub(currentStamping + 1);
+
+  if(currentStamping !== lines.length -1){
+    MakeSub(currentStamping + 1);
+  }
 }
 
 document.getElementById("subtainer").addEventListener('mousedown', function (e) { //用事件代理監聽字幕條兩端的拖動元素，這樣不用註冊很多監聽器，當拖動完成後會更新時間，如同K鍵,L鍵的效果
