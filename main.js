@@ -92,7 +92,7 @@ function handleFileUpload(e) {
       if (e.target.id === SRT_ID) {
         subTexts = reader.result.split('\n');
 
-        subTexts = subTexts.filter(function(item) { //自動刪除空白行
+        subTexts = subTexts.filter(function (item) { //自動刪除空白行
           return item != "" && item != "\r";
         });
 
@@ -269,8 +269,8 @@ function Kkeyfunction(video, reactTime = 0) {
   if (currentStamping >= lines.length) {
     return;
   }
-  
-  if(currentStamping !== lines.length -1){ //幫最後一行上時間標時，防止出現錯誤
+
+  if (currentStamping !== lines.length - 1) { //幫最後一行上時間標時，防止出現錯誤
     lines[currentStamping + 1][0] = clamp(video.currentTime - reactTime);
   }
 
@@ -281,7 +281,7 @@ function Kkeyfunction(video, reactTime = 0) {
   }
   MakeSub(currentStamping);
 
-  if(currentStamping !== lines.length -1){
+  if (currentStamping !== lines.length - 1) {
     MakeSub(currentStamping + 1);
     currentStamping += 1;
   }
@@ -292,12 +292,12 @@ function Lkeyfunction(video, reactTime = 0) {
     lines[currentStamping][0],
     video.currentTime - reactTime
   ];
-  if ((currentStamping !== lines.length -1) && lines[currentStamping][1] > lines[currentStamping + 1][0] && (lines[currentStamping + 1][0] !== null)) {
+  if ((currentStamping !== lines.length - 1) && lines[currentStamping][1] > lines[currentStamping + 1][0] && (lines[currentStamping + 1][0] !== null)) {
     lines[currentStamping + 1][0] = clamp(lines[currentStamping][1] + 0.03);
   }
   MakeSub(currentStamping);
 
-  if(currentStamping !== lines.length -1){
+  if (currentStamping !== lines.length - 1) {
     MakeSub(currentStamping + 1);
   }
 }
