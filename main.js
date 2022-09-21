@@ -224,7 +224,7 @@ wavesurfer.on('seek', function (seekprogress) { //這裡用比較奇怪的方法
 });
 
 document.getElementById("checkbox").addEventListener('change', function () {
-  if (this.checked) {
+  if (document.getElementById("checkbox").checked) {
     reactTime = 0.4;
   } else {
     reactTime = 0;
