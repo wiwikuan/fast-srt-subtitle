@@ -7,6 +7,7 @@ const video = document.querySelector('#video');
 const textArea = document.querySelector('#textArea');
 const status = document.querySelector('#status');
 let reactTime = 0;
+let IsAutoJump = 1;
 let subTexts = [];
 let currentStamping = 0;
 let lines = [];
@@ -231,6 +232,14 @@ document.getElementById("checkbox").addEventListener('change', function () {
   }
 });
 
+document.getElementById("autoJumpCheckbox").addEventListener('change', function () {
+  if (document.getElementById("autoJumpCheckbox").checked) {
+    IsAutoJump = 1;
+  } else {
+    IsAutoJump = 0;
+  }
+});
+
 wavesurfer.on('scroll', function (e) {
   document.getElementById('subbox').scrollLeft = e.target.scrollLeft;
 });
@@ -325,6 +334,7 @@ document.getElementById("subtainer").addEventListener('mousedown', function (e) 
       currentStamping = (Number(SubSequence) - 1);
       video.currentTime = (SubWidth[SubSequence] - newWidth + SubLeft[SubSequence]) / pxPerSec;
       Kkeyfunction(video);
+      autoJump();
       updateContent();
     }
   }
@@ -345,6 +355,7 @@ document.getElementById("subtainer").addEventListener('mousedown', function (e) 
       currentStamping = Number(SubSequence);
       video.currentTime = (newWidth + SubLeft[SubSequence]) / pxPerSec;
       Lkeyfunction(video);
+      autoJump();
       updateContent();
     }
   }
@@ -422,3 +433,14 @@ document.getElementById("subtainer").addEventListener('dblclick', function (e) {
   }
 
 });
+
+function autoJump() {  //當autoJump開啟時拖動或輸入結束時，自動跳到下一個未上時間標的地方
+  if (IsAutoJump == 1) {
+    for (let i = currentStamping; i < lines.length; i++) {
+      if ((lines[i][0] === null) || (lines[i][1] === null)) {
+      currentStamping = i;
+      break;
+      }
+    }
+  }
+}
