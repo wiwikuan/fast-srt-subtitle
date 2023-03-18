@@ -416,12 +416,15 @@ document.getElementById("subtainer").addEventListener('dblclick', function (e) {
       removeInputAndBtn();
       subTexts[SubSequence] = input.value + '\n';
       MakeSub(currentStamping);
+      autoJump();
       updateContent();
     }
   }
 
   function PressBtn() {
     removeInputAndBtn();
+    autoJump();
+    updateContent();
   }
 
   function removeInputAndBtn() {
