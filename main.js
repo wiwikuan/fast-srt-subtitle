@@ -442,6 +442,7 @@ function autoJump() {  //當autoJump開啟時拖動或輸入結束時，自動�
     for (let i = currentStamping; i < lines.length; i++) {
       if ((lines[i][0] === null) || (lines[i][1] === null)) {
       currentStamping = i;
+      video.currentTime = lines[i - 1][1] + 0.33; //自動跳轉後撥放頭也會自動跳轉到後面，並且向後一微小的偏移，以方便誤觸後生成的字幕不會太小，方便拖動
       break;
       }
     }
