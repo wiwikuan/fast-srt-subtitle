@@ -85,24 +85,61 @@ function handleFileUpload(e) {
     const reader = new FileReader();
     const file = e.target.files[0];
 
+    const currentFileName = file.name;
+    const currentFileExtension = currentFileName.split(".").pop();  //取得副檔名
+
     /*
       if it's srt file, fill text area with srt content
       if it's video, load it into video tag
     */
     reader.onload = function () {
       if (e.target.id === SRT_ID) {
-        subTexts = reader.result.split('\n');
+        if (currentFileExtension === 'srt') {  //如果匯入的是srt檔可以自動解析時間
+          let srtFileTexts = reader.result.split('\n');
+          srtFileTexts = srtFileTexts.filter(function (item) { //自動刪除空白行
+            return item != "" && item != "\r";
+          });
 
-        subTexts = subTexts.filter(function (item) { //自動刪除空白行
-          return item != "" && item != "\r";
-        });
+          let srtLength = srtFileTexts.length / 3;
 
-        subTexts.forEach((_, i) => (lines[i] = [null, null]));
-        lines[0][0] = 0;
+          for (let i = 0; i < srtLength; i++) {
+            subTexts[i] = srtFileTexts[i * 3 + 2];
+            subTexts[i] = subTexts[i].split('\r').shift() + "\r"; //統一為沒有換行的字幕加上換行
 
-        updateContent();
+            let startTimeStamp = srtFileTexts[i * 3 + 1].split("-->").shift();
+            let endTimeStamp = srtFileTexts[i * 3 + 1].split("-->").pop();
 
-        execHotkey(keyMap);
+            let timeStart = 3600 * startTimeStamp.split(':')[0];
+            timeStart = timeStart + 60 * startTimeStamp.split(':')[1];
+            timeStart = timeStart + 1 * startTimeStamp.split(':')[2].split(',').shift();
+            timeStart = timeStart + 0.001 * startTimeStamp.split(':')[2].split(',')[1].split(' ').shift();
+
+            let timeEnd = 3600 * endTimeStamp.split(':')[0].split(' ').pop();
+            timeEnd = timeEnd + 60 * endTimeStamp.split(':')[1];
+            timeEnd = timeEnd + 1 * endTimeStamp.split(':')[2].split(',').shift();
+            timeEnd = timeEnd + 0.001 * endTimeStamp.split(':')[2].split(',').pop();
+
+            lines[i] = [timeStart, timeEnd];
+            MakeSub(i);
+          }
+
+          updateContent();
+
+          execHotkey(keyMap);
+        } else {
+          subTexts = reader.result.split('\n');
+
+          subTexts = subTexts.filter(function (item) { //自動刪除空白行
+            return item != "" && item != "\r";
+          });
+
+          subTexts.forEach((_, i) => (lines[i] = [null, null]));
+          lines[0][0] = 0;
+
+          updateContent();
+
+          execHotkey(keyMap);
+        }
       }
     };
 
@@ -441,9 +478,9 @@ function autoJump() {  //當autoJump開啟時拖動或輸入結束時，自動�
   if (IsAutoJump == 1) {
     for (let i = currentStamping; i < lines.length; i++) {
       if ((lines[i][0] === null) || (lines[i][1] === null)) {
-      currentStamping = i;
-      video.currentTime = lines[i - 1][1] + 0.33; //自動跳轉後撥放頭也會自動跳轉到後面，並且向後一微小的偏移，以方便誤觸後生成的字幕不會太小，方便拖動
-      break;
+        currentStamping = i;
+        video.currentTime = lines[i - 1][1] + 0.33; //自動跳轉後撥放頭也會自動跳轉到後面，並且向後一微小的偏移，以方便誤觸後生成的字幕不會太小，方便拖動
+        break;
       }
     }
   }
