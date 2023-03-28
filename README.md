@@ -11,3 +11,6 @@ Make SRT Caption Fast!!!! This is a fast and dirty javascript SRT caption tool.
   * Q: Make SRT File
 
 Enjoy.
+
+# Demo
+[demo](https://anosanstudio.github.io/fast-srt-subtitle/)
