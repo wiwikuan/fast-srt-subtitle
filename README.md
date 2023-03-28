@@ -1,3 +1,4 @@
+Fork from [wiwikuan/fast-srt-subtitle](https://github.com/wiwikuan/fast-srt-subtitle).
 # fast-srt-subtitle
 Make SRT Caption Fast!!!! This is a fast and dirty javascript SRT caption tool.
 
