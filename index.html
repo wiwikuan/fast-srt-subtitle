@@ -1,36 +1,118 @@
 <html>
-  <title>Fast and Dirty Captioner</title>
+<title>Fast and Dirty Captioner</title>
 
-  <head>
-    <meta charset="UTF-8" />
+<head>
+  <meta charset="UTF-8" />
+  <script src="https://unpkg.com/wavesurfer.js"></script>
 
-    <style>
-      .video {
-        width: 960px;
-      }
-    </style>
-  </head>
+  <style>
+    .header {
+      height: 6%;
+      text-align: center;
+      line-height: 250%;
+    }
 
-  <body>
-    <p>選取字幕檔以及影片檔案開始製作 SRT！</p>
-    <label>
-      <span>選擇字幕檔案：</span>
-      <input
-        id="srtFile"
-        type="file"
-        name="srtFile"
-        placeholder="點擊上傳字幕檔"
-      />
-    </label>
+    .left {
+      width: 50%;
+      float: left;
+    }
+
+    .video {
+      width: 100%;
+      float: left;
+    }
+
+    #waveform {
+      width: 100%;
+      float: left;
+    }
+
+    #MakeSrtBtn {
+      margin-top: 1%;
+      float: right;
+    }
+
+    #subbox {
+      width: 100%;
+      float: left;
+      overflow-x: hidden;
+      height: 40px;
+      position: relative;
+    }
+
+    #subtainer {
+      background: Gray;
+      width: 100%;
+      height: 20px;
+      position: absolute;
+      top: 50%;
+      transform: translate(0, -50%);
+    }
+
+    .subleft {
+      float: left;
+      width: 5px;
+      height: 100%;
+      cursor: url("Lcursor.png") 12 12, col-resize;
+      transition: 0.2s;
+    }
+
+    .subleft:hover {
+      float: left;
+      width: 5px;
+      height: 100%;
+      background: Magenta;
+      cursor: url("Lcursor.png") 12 12, col-resize;
+    }
+
+    .subright {
+      float: right;
+      width: 5px;
+      height: 100%;
+      cursor: url("Rcursor.png") 12 12, col-resize;
+      transition: 0.2s;
+    }
+
+    .subright:hover {
+      float: right;
+      width: 5px;
+      height: 100%;
+      background: Yellow;
+      cursor: url("Rcursor.png") 12 12, col-resize;
+    }
+
+    .right {
+      float: right;
+      width: 49%;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="header">選取字幕檔以及影片檔案開始製作 SRT！</div>
+  <div class="left">
     <label>
       <span>選擇影片檔案：</span>
-      <input
-        id="videoFile"
-        type="file"
-        name="videoFile"
-        placeholder="點擊上傳影片檔"
-      />
+      <input id="videoFile" type="file" name="videoFile" placeholder="點擊上傳影片檔" />
     </label>
+    <p>
+      <video class="video" id="video" controls></video>
+    </p>
+    <div id="subbox">
+      <div id="subtainer"></div>
+    </div>
+    <div id="waveform"></div>
+    <button id="MakeSrtBtn">匯出 SRT 檔</button>
+  </div>
+  <div class="right">
+    <p id="status">Test Text.</p>
+    <textarea id="textArea" rows="10" cols="80">預設的字。</textarea>
+    <p>
+      <label>
+        <span>選擇字幕檔案(txt或srt檔)：</span>
+        <input id="srtFile" type="file" name="srtFile" placeholder="點擊上傳字幕檔" />
+      </label>
+    </p>
     <p>
       K: 下一行開始 | L: 這一行提前結束 | I: 前捲一行 | O: 後捲一行 | U: 倒帶 2
       秒 | P: 前進 2 秒 | Q: 製作 SRT 檔
@@ -39,9 +121,10 @@
       K: Next Line | L: This Line Ends Early | I: Scroll Back | O: Scroll
       Forward | U: Rewind | P: Forward | Q: Make SRT File
     </p>
-    <p id="status">Test Text.</p>
-    <textarea id="textArea" rows="10" cols="80">預設的字。</textarea>
-    <video class="video" id="video" controls></video>
-  </body>
-  <script src="main.js"></script>
+    <input type="checkbox" id="checkbox">Reaction Time
+    <input type="checkbox" id="autoJumpCheckbox" checked="checked">Auto Jump
+  </div>
+</body>
+<script src="main.js"></script>
+
 </html>
